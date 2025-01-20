@@ -1,68 +1,45 @@
 import { action, condition, expression } from "../template/aceDefine.js";
 
-const category = "Aces_In_Single_File";
-
-action(
-  category,
-  "SampleAction",
-  {
-    highlight: false,
-    deprecated: false,
-    isAsync: false,
-    listName: "Sample Action",
-    displayText: "Sample Action {0}",
-    description: "This is a sample action",
-    params: [
-      {
-        id: "param1",
-        name: "Param1",
-        desc: "This is a sample param",
-        type: "string",
-        initialValue: '"Hello World"',
-      },
-    ],
-  },
-  function (param) {
-    console.log(param);
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        console.log("Sample Action");
-        resolve();
-      }, 1000);
-    });
-  }
-);
+const category = "general";
 
 condition(
   category,
-  "SampleCondition",
+  "IsEnabled",
   {
+    id: "isenabled",
     highlight: false,
     deprecated: false,
-    listName: "Sample Condition",
-    displayText: "Sample Condition",
-    description: "This is a sample condition",
-    params: [],
+    listName: "Is Enabled",
+    displayText: "{my}: Is Enabled",
+    description: "Wether the behavior is enabled",
   },
   function () {
-    console.log("Sample Condition");
-    return true;
+    return this.enabled;
   }
 );
 
-expression(
+action(
   category,
-  "SampleExpression",
+  "SetEnabled",
   {
+    id: "set-enabled",
     highlight: false,
     deprecated: false,
-    returnType: "string",
-    description: "This is a sample expression",
-    params: [],
+    listName: "Set Enabled",
+    displayText: "{my}: Set {0}",
+    description: "Enable or disable the behavior",
+    params: [
+      {
+        type: "combo",
+        id: "enabled",
+        name: "Enabled",
+        desc: "Enable or disable",
+        initialValue: "enabled",
+        items: [{ enabled: "Enabled" }, { disabled: "Disabled" }],
+      },
+    ],
   },
-  function () {
-    console.log("Sample Expression");
-    return "Sample Expression";
-  },
-  false
+  function (enabled) {
+    this.enabled = enabled === 0;
+  }
 );

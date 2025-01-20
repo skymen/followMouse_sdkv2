@@ -5,15 +5,16 @@ import {
   PROPERTY_TYPE,
 } from "./template/enums.js";
 import _version from "./version.js";
-export const addonType = ADDON_TYPE.PLUGIN;
+export const addonType = ADDON_TYPE.BEHAVIOR;
 export const type = PLUGIN_TYPE.OBJECT;
-export const id = "sample_addon";
-export const name = "Sample Addon";
+export const id = "skymen_FollowMouse";
+export const name = "Follow Mouse";
 export const version = _version;
 export const author = "skymen";
-export const website = "https://www.construct.net";
-export const documentation = "https://www.construct.net";
-export const description = "Description";
+export const website = "https://github.com/skymen/followMouse_sdkv2";
+export const documentation =
+  "https://www.construct.net/en/make-games/addons/543/follow-mouse/documentation";
+export const description = "Uses this sprite as a mouse cursor";
 export const category = ADDON_CATEGORY.GENERAL;
 
 export const hasDomside = false;
@@ -36,7 +37,7 @@ export const info = {
     GooglePlayServicesEnabled: false,
 
     // BEHAVIOR only
-    IsOnlyOneAllowed: false,
+    IsOnlyOneAllowed: true,
 
     // PLUGIN world only
     IsResizable: false,
@@ -50,7 +51,7 @@ export const info = {
     MustPreDraw: false,
 
     // PLUGIN object only
-    IsSingleGlobal: true,
+    IsSingleGlobal: false,
   },
   // PLUGIN only
   AddCommonACEs: {
@@ -100,4 +101,13 @@ export const properties = [
     desc: "Property Description",
   }
   */
+  {
+    id: "enabled",
+    type: PROPERTY_TYPE.CHECK,
+    name: "Enabled",
+    desc: "Wether the behavior is enabled",
+    options: {
+      initialValue: true,
+    },
+  },
 ];
